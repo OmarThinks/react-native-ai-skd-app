@@ -9,6 +9,7 @@ export default function App() {
     fetch: expoFetch as unknown as typeof globalThis.fetch,
     api: generateAPIUrl("/api/chat"),
     onError: (error) => console.error(error, "ERROR"),
+    maxSteps: 5,
   });
 
   const colors = useTheme().colors;
@@ -33,7 +34,23 @@ export default function App() {
                 <Text style={{ fontWeight: 700, color: colors.text }}>
                   {m.role}
                 </Text>
-                <Text style={{ color: colors.text }}>{m.content}</Text>
+                {m.toolInvocations ? (
+                  <Text
+                    style={{
+                      color: colors.text,
+                    }}
+                  >
+                    {JSON.stringify(m.toolInvocations, null, 2)}
+                  </Text>
+                ) : (
+                  <Text
+                    style={{
+                      color: colors.text,
+                    }}
+                  >
+                    {m.content}
+                  </Text>
+                )}
               </View>
             </View>
           ))}
