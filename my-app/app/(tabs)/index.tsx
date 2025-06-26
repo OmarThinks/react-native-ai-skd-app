@@ -20,6 +20,7 @@ export default function App() {
           display: "flex",
           flexDirection: "column",
           paddingHorizontal: 8,
+          backgroundColor: "white",
         }}
       >
         <ScrollView style={{ flex: 1 }}>
