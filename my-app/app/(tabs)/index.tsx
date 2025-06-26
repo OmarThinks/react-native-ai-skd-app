@@ -5,12 +5,20 @@ import { fetch as expoFetch } from "expo/fetch";
 import { View, TextInput, ScrollView, Text, SafeAreaView } from "react-native";
 
 export default function App() {
-  const { messages, error, handleInputChange, input, handleSubmit } = useChat({
-    fetch: expoFetch as unknown as typeof globalThis.fetch,
-    api: generateAPIUrl("/api/chat"),
-    onError: (error) => console.error(error, "ERROR"),
-    maxSteps: 5,
-  });
+  const { messages, error, handleInputChange, input, handleSubmit, status } =
+    useChat({
+      fetch: expoFetch as unknown as typeof globalThis.fetch,
+      api: generateAPIUrl("/api/chat"),
+      onError: (error) => console.error(error, "ERROR"),
+      maxSteps: 5,
+      initialMessages: [
+        {
+          id: "0",
+          role: "assistant",
+          content: "How can I help you today?",
+        },
+      ],
+    });
 
   const colors = useTheme().colors;
 
